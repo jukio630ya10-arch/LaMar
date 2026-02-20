@@ -14,6 +14,7 @@ public class SecurityConfig {
 	@Autowired
     private CustomUserDetailsService customUserDetailsService;
 
+	@SuppressWarnings("deprecation")
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 	    return org.springframework.security.crypto.password.NoOpPasswordEncoder.getInstance();
@@ -25,8 +26,8 @@ public class SecurityConfig {
         http
             .authorizeHttpRequests(authorize -> authorize
                 // URLs públicas
-                .requestMatchers("/", "/login", "/web/clientes/crear").permitAll()
-                // URLs para ADMIN solo
+            		.requestMatchers("/", "/login", "/menu", "/web/clientes/crear").permitAll()
+            	// URLs para ADMIN solo
                 .requestMatchers("/web/productos/**", "/web/categorias/**", "/web/usuarios/**").hasRole("ADMIN")
                 // URLs para CLIENTE
                 .requestMatchers("/web/reservas/**", "/web/pedidos/**").hasRole("CLIENTE")
