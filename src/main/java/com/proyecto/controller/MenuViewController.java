@@ -12,6 +12,7 @@ import com.proyecto.service.ProductoService;
 import com.proyecto.service.ReservaService;
 import com.proyecto.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -46,8 +47,22 @@ public class MenuViewController {
     private ClienteService clienteService;
 
     @GetMapping("/home")
-    public String home(Model model) {
-        model.addAttribute("mesas", mesaService.listarMesas());
+    public String home(Authentication authentication) {
+        boolean isAdmin = authentication.getAuthorities().stream()
+                .map(authority -> authority.getAuthority().toUpperCase())
+                .anyMatch(authority -> authority.equals("ROLE_ADMIN") || authority.equals("ADMIN"));
+
+        return isAdmin ? "redirect:/home/admin" : "redirect:/home/cliente";
+    }
+    
+    @GetMapping("/home/cliente")
+    public String homeCliente(Model model) {
+        model.addAttribute("productos", productoService.listarProductos());
+        return "menu-cliente";
+    }
+
+    @GetMapping("/home/admin")
+    public String homeAdmin(Model model) {        model.addAttribute("mesas", mesaService.listarMesas());
         model.addAttribute("reservas", reservaService.listarReservas());
         model.addAttribute("pedidos", pedidoService.listarPedidos());
         model.addAttribute("clientes", clienteService.listarClientes());
@@ -64,8 +79,7 @@ public class MenuViewController {
             actual.setCapacidad(mesa.getCapacidad());
             mesaService.guardarMesa(actual);
         });
-        return "redirect:/home";
-    }
+        return "redirect:/home/admin";    }
 
     @PostMapping("/home/clientes/{id}")
     public String actualizarCliente(@PathVariable Integer id, @ModelAttribute Cliente cliente) {
@@ -75,8 +89,7 @@ public class MenuViewController {
             actual.setTelefono(cliente.getTelefono());
             clienteService.guardarCliente(actual);
         });
-        return "redirect:/home";
-    }
+        return "redirect:/home/admin";    }
 
     @PostMapping("/home/pedidos/{id}")
     public String actualizarPedido(@PathVariable Integer id, @ModelAttribute Pedido pedido) {
@@ -85,8 +98,7 @@ public class MenuViewController {
             actual.setTotal(pedido.getTotal());
             pedidoService.guardarPedido(actual);
         });
-        return "redirect:/home";
-    }
+        return "redirect:/home/admin";    }
 
     @PostMapping("/home/reservas/{id}")
     public String actualizarReserva(@PathVariable Integer id, @ModelAttribute Reserva reserva) {

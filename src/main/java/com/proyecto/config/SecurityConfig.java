@@ -1,5 +1,7 @@
 package com.proyecto.config;
 
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -27,17 +29,31 @@ public class SecurityConfig {
             .authorizeHttpRequests(authorize -> authorize
                 // URLs públicas
             		.requestMatchers("/", "/login", "/menu", "/web/clientes/crear").permitAll()
-            	// URLs para ADMIN solo
-                .requestMatchers("/web/productos/**", "/web/categorias/**", "/web/usuarios/**").hasRole("ADMIN")
+            		  .requestMatchers("/home/admin/**", "/home/mesas/**", "/home/clientes/**", "/home/pedidos/**", "/home/reservas/**").hasAnyAuthority("ADMIN", "ROLE_ADMIN")
+                      .requestMatchers("/home/cliente/**").hasAnyAuthority("CLIENTE", "ROLE_CLIENTE", "ADMIN", "ROLE_ADMIN")
+                   	// URLs para ADMIN solo
+                      .requestMatchers("/web/productos/**", "/web/categorias/**", "/web/usuarios/**").hasAnyAuthority("ADMIN", "ROLE_ADMIN")
                 // URLs para CLIENTE
-                .requestMatchers("/web/reservas/**", "/web/pedidos/**").hasRole("CLIENTE")
-                // cualquier otra URL requiere autenticación
+                      .requestMatchers("/web/reservas/**", "/web/pedidos/**").hasAnyAuthority("CLIENTE", "ROLE_CLIENTE")
+                   // cualquier otra URL requiere autenticación
                 .anyRequest().authenticated()
             )
             // Form login
             .formLogin(form -> form
                 .loginPage("/login")
-                .defaultSuccessUrl("/home", true)
+
+                .successHandler((request, response, authentication) -> {
+                    Set<String> authorities = authentication.getAuthorities().stream()
+                            .map(grantedAuthority -> grantedAuthority.getAuthority().toUpperCase())
+                            .collect(java.util.stream.Collectors.toSet());
+
+                    if (authorities.contains("ROLE_ADMIN") || authorities.contains("ADMIN")) {
+                        response.sendRedirect("/home/admin");
+                        return;
+                    }
+
+                    response.sendRedirect("/home/cliente");
+                })
                 .permitAll()
             )
             // Logout
