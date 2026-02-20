@@ -17,12 +17,7 @@ public class LoginController {
 
 	@GetMapping("/home")
 	public String home() {
-	    return "index"; // redirige al index después del login
+	    return "menu-admin"; // redirige al index después del login
 	}
 
-	@GetMapping("/menu")
-	public String menu() {
-	    return "almacen-inicio";
-	}
-    
 }
