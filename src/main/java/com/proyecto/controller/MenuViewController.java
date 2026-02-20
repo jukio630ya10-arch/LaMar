@@ -144,7 +144,7 @@ public class MenuViewController {
     @PostMapping("/categorias/guardar")
     public String guardarCategoria(@ModelAttribute Categoria categoria) {
         categoriaService.guardarCategoria(categoria);
-        return "redirect:/categorias";
+        return "redirect:/home/admin";
     }
 
     @GetMapping("/categorias/eliminar/{id}")
@@ -179,7 +179,7 @@ public class MenuViewController {
     @PostMapping("/productos/guardar")
     public String guardarProducto(@ModelAttribute Producto producto) {
         productoService.guardarProducto(producto);
-        return "redirect:/productos";
+        return "redirect:/home/admin";
     }
 
     @GetMapping("/productos/eliminar/{id}")
@@ -214,7 +214,7 @@ public class MenuViewController {
     @PostMapping("/usuarios/guardar")
     public String guardarUsuario(@ModelAttribute Usuario usuario) {
         usuarioService.guardarUsuario(usuario);
-        return "redirect:/usuarios";
+        return "redirect:/home/admin";
     }
 
     @GetMapping("/usuarios/eliminar/{id}")
