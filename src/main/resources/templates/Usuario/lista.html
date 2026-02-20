@@ -49,8 +49,8 @@
                             <td th:text="${u.id}"></td>
                             <td th:text="${u.nombre}"></td>
                             <td th:text="${u.email}"></td>
-                            <td th:text="${u.rol}"></td>
-                            <td>
+                            <td th:text="${u.rol != null ? u.rol.nombre : '-'}"></td>
+							                            <td>
                                 <div class="btn-group btn-group-sm">
                                     <a th:href="@{/usuarios/editar/{id}(id=${u.id})}" class="btn btn-warning">Editar</a>
                                     <a th:href="@{/usuarios/eliminar/{id}(id=${u.id})}" class="btn btn-danger" onclick="return confirm('¿Eliminar usuario?');">Eliminar</a>

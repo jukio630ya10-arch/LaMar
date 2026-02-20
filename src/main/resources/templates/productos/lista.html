@@ -103,7 +103,6 @@
 													 <th>Categoría</th>
 						                             <th>Modelo</th>
 						                             <th>Precio</th>
-						                             <th>Stock</th>
 						                             <th>Acciones</th>
 						                         </tr>
 						                         </thead>
@@ -114,7 +113,6 @@
 													 <td th:text="${p.categoria != null ? p.categoria.nombre : 'Sin categoría'}"></td>
 						                             <td th:text="|MDL-${p.id}|"></td>
 						                             <td th:text="|S/ ${#numbers.formatDecimal(p.precio,1,2)}|"></td>
-						                             <td th:classappend="${p.stock < 10} ? 'stock-low' : ''" th:text="${p.stock}"></td>
 						                             <td>
 						                                 <div class="btn-group btn-group-sm">
 						                                     <a th:href="@{/productos/editar/{id}(id=${p.id})}" class="btn btn-warning">Editar</a>

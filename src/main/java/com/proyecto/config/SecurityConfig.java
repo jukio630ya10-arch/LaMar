@@ -28,8 +28,7 @@ public class SecurityConfig {
         http
             .authorizeHttpRequests(authorize -> authorize
                 // URLs públicas
-            		.requestMatchers("/", "/login", "/menu", "/web/clientes/crear").permitAll()
-            		  .requestMatchers("/home/admin/**", "/home/mesas/**", "/home/clientes/**", "/home/pedidos/**", "/home/reservas/**").hasAnyAuthority("ADMIN", "ROLE_ADMIN")
+            		.requestMatchers("/", "/login", "/menu", "/web/clientes/crear", "/web/clientes/guardar").permitAll()            		  .requestMatchers("/home/admin/**", "/home/mesas/**", "/home/clientes/**", "/home/pedidos/**", "/home/reservas/**").hasAnyAuthority("ADMIN", "ROLE_ADMIN")
                       .requestMatchers("/home/cliente/**").hasAnyAuthority("CLIENTE", "ROLE_CLIENTE", "ADMIN", "ROLE_ADMIN")
                    	// URLs para ADMIN solo
                       .requestMatchers("/web/productos/**", "/web/categorias/**", "/web/usuarios/**").hasAnyAuthority("ADMIN", "ROLE_ADMIN")

@@ -41,9 +41,13 @@
 	                        <div class="mb-3"><label class="form-label">Nombre</label><input type="text" th:field="*{nombre}" class="form-control" required></div>
 	                        <div class="mb-3"><label class="form-label">Email</label><input type="email" th:field="*{email}" class="form-control" required></div>
 	                        <div class="mb-3"><label class="form-label">Password</label><input type="text" th:field="*{password}" class="form-control" required></div>
-	                        <div class="mb-3"><label class="form-label">Rol</label><input type="text" th:field="*{rol}" class="form-control" required></div>
-	                        <button type="submit" class="btn btn-success">Guardar</button>
-	                        <a th:href="@{/usuarios}" class="btn btn-secondary">Volver</a>
+							<div class="mb-3"><label class="form-label">Rol</label>
+														<select th:field="*{rol}" class="form-select" required>
+															<option value="">Seleccione un rol</option>
+															<option th:each="rolItem : ${roles}" th:value="${rolItem.id}" th:text="${rolItem.nombre}"></option>
+														</select>
+													</div>	                        <button type="submit" class="btn btn-success">Guardar</button>
+	                        <a th:href="@{/home}" class="btn btn-secondary">Volver</a>
 	                    </form>
 	                </div>
 	            </div>
