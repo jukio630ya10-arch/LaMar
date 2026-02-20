@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Login - Restaurante La Mar</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+        }
+        .split-left {
+            background-image: url('/img/restaurante.jpg'); /* imagen del restaurante o plato */
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+        }
+        .split-right {
+            background-color: #f8f9fa; /* fondo elegante, puedes cambiar el color */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .login-card {
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 15px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.3);
+        }
+        .login-card img.logo {
+            width: 120px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid h-100">
+        <div class="row h-100">
+            <!-- Lado izquierdo: Imagen -->
+            <div class="col-md-6 d-none d-md-block split-left">
+                <!-- Puedes agregar un overlay si quieres -->
+            </div>
+
+            <!-- Lado derecho: Login -->
+            <div class="col-md-6 split-right">
+                <div class="login-card text-center">
+                    <img class="logo" th:src="@{/img/logo.png}" alt="Logo Restaurante La Mar">
+                    <h3 class="mb-4">Iniciar Sesión</h3>
+                    <form th:action="@{/login}" method="post">
+                        <div class="mb-3">
+                            <input type="text" name="username" class="form-control" placeholder="Email" required>
+                        </div>
+                        <div class="mb-3">
+                            <input type="password" name="password" class="form-control" placeholder="Contraseña" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Ingresar</button>
+                    </form>
+                    <hr>
+                    <p>¿No tienes cuenta?</p>
+                    <a th:href="@{/web/clientes/crear}" class="btn btn-success w-100">Registrar como nuevo cliente</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+
+
