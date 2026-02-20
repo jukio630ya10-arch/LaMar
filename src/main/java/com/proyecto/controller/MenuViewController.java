@@ -51,6 +51,9 @@ public class MenuViewController {
         model.addAttribute("reservas", reservaService.listarReservas());
         model.addAttribute("pedidos", pedidoService.listarPedidos());
         model.addAttribute("clientes", clienteService.listarClientes());
+        model.addAttribute("categorias", categoriaService.listarCategorias());
+        model.addAttribute("productos", productoService.listarProductos());
+        model.addAttribute("usuarios", usuarioService.listarUsuarios());
         return "menu-admin";
     }
 

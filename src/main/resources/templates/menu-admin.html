@@ -11,12 +11,12 @@
         .layout { display:grid; grid-template-columns:250px 1fr; min-height:100vh; }
         .sidebar { background:#fff; border-right:1px solid #dee2e6; }
         .brand { font-size:1.2rem; font-weight:600; padding:1rem; border-bottom:1px solid #dee2e6; }
-        .sidebar .nav-link { color:#2a4a66; padding:.75rem 1rem; border-radius:0; }
 		.sidebar .nav-link.active, .sidebar .nav-link:hover { background:#e9f2fb; color:#0d6efd; }
-		 .hero { background: linear-gradient(135deg, #0d6efd, #0b5ed7); color:#fff; border-radius: 14px; }
-		 .section-card { border:1px solid #dee2e6; border-radius:12px; box-shadow: 0 1px 2px rgba(0,0,0,.06); }
-		 .icon-badge { width:42px; height:42px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; background:#e9f2fb; color:#0d6efd; }
-		  .quick-link { text-decoration:none; }
+		        .hero { background: linear-gradient(135deg, #0d6efd, #0b5ed7); color:#fff; border-radius:14px; }
+		        .section-card { border:1px solid #dee2e6; border-radius:12px; box-shadow: 0 1px 2px rgba(0,0,0,.06); }
+		        .table thead th { background:#f1f3f5; white-space:nowrap; }
+		        .section-title { border-left:4px solid #0d6efd; padding-left:.6rem; }
+		        .table input { min-width:110px; }
     </style>
 </head>
 <body>
@@ -25,102 +25,170 @@
         <div class="brand">Restaurante | Admin</div>
         <nav class="nav flex-column py-2">
 			<a class="nav-link active" th:href="@{/home}"><i class="bi bi-speedometer2 me-2"></i>Panel principal</a>
-			<a class="nav-link" th:href="@{/mesas}"><i class="bi bi-grid-3x3-gap me-2"></i>Mesas</a>
-			<a class="nav-link" th:href="@{/reservas}"><i class="bi bi-calendar-check me-2"></i>Reservas</a>
-			<a class="nav-link" th:href="@{/pedidos}"><i class="bi bi-receipt me-2"></i>Pedidos</a>
-			<a class="nav-link" th:href="@{/clientes}"><i class="bi bi-person-lines-fill me-2"></i>Clientes</a>
-					   
-            <a class="nav-link" th:href="@{/productos}"><i class="bi bi-box-seam me-2"></i>Productos</a>
+			            <a class="nav-link" href="#mesas"><i class="bi bi-grid-3x3-gap me-2"></i>Mesas</a>
+			            <a class="nav-link" href="#reservas"><i class="bi bi-calendar-check me-2"></i>Reservas</a>
+			            <a class="nav-link" href="#pedidos"><i class="bi bi-receipt me-2"></i>Pedidos</a>
+			            <a class="nav-link" href="#clientes"><i class="bi bi-person-lines-fill me-2"></i>Clientes</a>
+			            <a class="nav-link" href="#catalogo"><i class="bi bi-box-seam me-2"></i>Catálogo</a>
+			            <a class="nav-link" href="#usuarios"><i class="bi bi-people me-2"></i>Usuarios</a>
+			        </nav>
+			
+			</aside>
 
-			<a class="nav-link" th:href="@{/categorias}"><i class="bi bi-tags me-2"></i>Categorías</a>
-			           <a class="nav-link" th:href="@{/usuarios}"><i class="bi bi-people me-2"></i>Usuarios</a></nav>
-    </aside>
-
-    <main class="container py-4 py-lg-5">
+    <main class="container-fluid py-4 px-4">
         <section class="hero p-4 p-lg-5 mb-4">
             <h1 class="display-6 fw-semibold mb-2">Panel de administración del restaurante</h1>
+			<p class="mb-0">Aquí puedes listar y gestionar directamente mesas, reservas, pedidos, clientes, categorías, productos y usuarios.</p>
+			        </section>
+					
+					<section id="mesas" class="section-card bg-white p-3 mb-3">
+					           <h2 class="h5 section-title mb-3">Mesas</h2>
+					           <div class="table-responsive">
+					               <table class="table table-hover align-middle mb-0">
+					                   <thead>
+					                   <tr><th>ID</th><th>Número</th><th>Capacidad</th><th>Acciones</th></tr>
+					                   </thead>
+					                   <tbody>
+					                   <tr th:each="mesa : ${mesas}">
+					                       <form th:action="@{/home/mesas/{id}(id=${mesa.id})}" method="post">
+					                           <td th:text="${mesa.id}"></td>
+					                           <td><input class="form-control form-control-sm" type="number" name="numero" th:value="${mesa.numero}" required></td>
+					                           <td><input class="form-control form-control-sm" type="number" name="capacidad" th:value="${mesa.capacidad}" required></td>
+					                           <td><button class="btn btn-primary btn-sm" type="submit">Guardar</button></td>
+					                       </form>
+					                   </tr>
+					                   </tbody>
+					               </table>
+            </div>
+			</section>
 			
-			            <p class="mb-3">
-							Desde este menú el administrador puede gestionar las mesas, las reservas, los pedidos y el catálogo.
-							                También puedes entrar a clientes y usuarios para mantener control total de la operación diaria.
-							            </p>
-            <div class="d-flex flex-wrap gap-2">
+			<section id="reservas" class="section-card bg-white p-3 mb-3">
+			           <h2 class="h5 section-title mb-3">Reservas</h2>
+			           <div class="table-responsive">
+			               <table class="table table-hover align-middle mb-0">
+			                   <thead>
+			                   <tr><th>ID</th><th>Fecha</th><th>Hora</th><th>Cliente</th><th>Mesa</th><th>Acciones</th></tr>
+			                   </thead>
+			                   <tbody>
+			                   <tr th:each="reserva : ${reservas}">
+			                       <form th:action="@{/home/reservas/{id}(id=${reserva.id})}" method="post">
+			                           <td th:text="${reserva.id}"></td>
+			                           <td><input class="form-control form-control-sm" type="date" name="fecha" th:value="${reserva.fecha}" required></td>
+			                           <td><input class="form-control form-control-sm" type="time" name="hora" th:value="${reserva.hora}" required></td>
+			                           <td th:text="${reserva.cliente != null ? reserva.cliente.nombre : '-'}"></td>
+			                           <td th:text="${reserva.mesa != null ? reserva.mesa.numero : '-'}"></td>
+			                           <td><button class="btn btn-primary btn-sm" type="submit">Guardar</button></td>
+			                       </form>
+			                   </tr>
+			                   </tbody>
+			               </table>
+            </div>
+			</section>
+			<section id="pedidos" class="section-card bg-white p-3 mb-3">
+			           <h2 class="h5 section-title mb-3">Pedidos</h2>
+			           <div class="table-responsive">
+			               <table class="table table-hover align-middle mb-0">
+			                   <thead>
+			                   <tr><th>ID</th><th>Fecha</th><th>Estado</th><th>Total</th><th>Cliente</th><th>Acciones</th></tr>
+			                   </thead>
+			                   <tbody>
+			                   <tr th:each="pedido : ${pedidos}">
+			                       <form th:action="@{/home/pedidos/{id}(id=${pedido.id})}" method="post">
+			                           <td th:text="${pedido.id}"></td>
+			                           <td th:text="${pedido.fecha}"></td>
+			                           <td><input class="form-control form-control-sm" type="text" name="estado" th:value="${pedido.estado}" required></td>
+			                           <td><input class="form-control form-control-sm" type="number" step="0.01" min="0" name="total" th:value="${pedido.total}" required></td>
+			                           <td th:text="${pedido.cliente != null ? pedido.cliente.nombre : '-'}"></td>
+			                           <td><button class="btn btn-primary btn-sm" type="submit">Guardar</button></td>
+			                       </form>
+			                   </tr>
+			                   </tbody>
+			               </table>
+            </div>
+			</section>
+			
+			<section id="clientes" class="section-card bg-white p-3 mb-3">
+			            <h2 class="h5 section-title mb-3">Clientes</h2>
+			            <div class="table-responsive">
+			                <table class="table table-hover align-middle mb-0">
+			                    <thead>
+			                    <tr><th>ID</th><th>Nombre</th><th>Email</th><th>Teléfono</th><th>Acciones</th></tr>
+			                    </thead>
+			                    <tbody>
+			                    <tr th:each="cliente : ${clientes}">
+			                        <form th:action="@{/home/clientes/{id}(id=${cliente.id})}" method="post">
+			                            <td th:text="${cliente.id}"></td>
+			                            <td><input class="form-control form-control-sm" type="text" name="nombre" th:value="${cliente.nombre}" required></td>
+			                            <td><input class="form-control form-control-sm" type="email" name="email" th:value="${cliente.email}" required></td>
+			                            <td><input class="form-control form-control-sm" type="text" name="telefono" th:value="${cliente.telefono}"></td>
+			                            <td><button class="btn btn-primary btn-sm" type="submit">Guardar</button></td>
+			                        </form>
+			                    </tr>
+			                    </tbody>
+			                </table>
+							
+            </div>
 
-			<a class="btn btn-light btn-sm" th:href="@{/mesas}"><i class="bi bi-grid-3x3-gap me-1"></i>Gestionar mesas</a>
-			               <a class="btn btn-light btn-sm" th:href="@{/reservas}"><i class="bi bi-calendar-check me-1"></i>Gestionar reservas</a>
-			               <a class="btn btn-light btn-sm" th:href="@{/pedidos}"><i class="bi bi-receipt me-1"></i>Gestionar pedidos</a>
-			               <a class="btn btn-light btn-sm" th:href="@{/clientes}"><i class="bi bi-person-lines-fill me-1"></i>Gestionar clientes</a></div>
-        </section>
-
-        <div class="row g-3">
-            <div class="col-12 col-lg-6">
-                <article class="section-card bg-white p-4 h-100">
-                    <div class="d-flex align-items-center gap-2 mb-2">
-						<span class="icon-badge"><i class="bi bi-grid-3x3-gap"></i></span>
-						                       <h2 class="h5 m-0">Mesas</h2>
+			</section>
+			
+			<section id="catalogo" class="section-card bg-white p-3 mb-3">
+			            <h2 class="h5 section-title mb-3">Categorías y productos</h2>
+			            <div class="row g-3">
+			                <div class="col-12 col-xl-4">
+			                    <h3 class="h6">Categorías</h3>
+			                    <a th:href="@{/categorias/nuevo}" class="btn btn-primary btn-sm mb-2">Crear categoría</a>
+			                    <div class="table-responsive">
+			                        <table class="table table-sm table-hover align-middle">
+			                            <thead><tr><th>ID</th><th>Nombre</th><th></th></tr></thead>
+			                            <tbody>
+			                            <tr th:each="categoria : ${categorias}">
+			                                <td th:text="${categoria.id}"></td>
+			                                <td th:text="${categoria.nombre}"></td>
+			                            </tr>
+			                            </tbody>
+			                        </table>
                     </div>
-                    <p class="mb-2">
-						Controla disponibilidad de mesas, capacidad y estado de atención para ordenar el flujo en salón.
-					</p>
- 					<a th:href="@{/mesas}" class="quick-link">Abrir módulo de mesas <i class="bi bi-arrow-right"></i></a>
-                 </article>
+					</div>
+					               <div class="col-12 col-xl-8">
+					                   <h3 class="h6">Productos</h3>
+					                   <a th:href="@{/productos/nuevo}" class="btn btn-primary btn-sm mb-2">Crear producto</a>
+					                   <div class="table-responsive">
+					                       <table class="table table-sm table-hover align-middle">
+					                           <thead><tr><th>ID</th><th>Nombre</th><th>Precio</th><th>Categoría</th><th></th></tr></thead>
+					                           <tbody>
+					                           <tr th:each="producto : ${productos}">
+					                               <td th:text="${producto.id}"></td>
+					                               <td th:text="${producto.nombre}"></td>
+					                               <td th:text="${#numbers.formatDecimal(producto.precio,1,2)}"></td>
+					                               <td th:text="${producto.categoria != null ? producto.categoria.nombre : '-'}"></td>
+					                           </tr>
+					                           </tbody>
+					                       </table>
+					                   </div>
+					               </div>
             </div>
+			</section>
 
-            <div class="col-12 col-lg-6">
-                <article class="section-card bg-white p-4 h-100">
-                    <div class="d-flex align-items-center gap-2 mb-2">
-						<span class="icon-badge"><i class="bi bi-calendar-check"></i></span>
-					<h2 class="h5 m-0">Reservas</h2>
-                    </div>
-                    <p class="mb-2">
-						Gestiona reservas por fecha y hora, con mesa asignada y cliente relacionado para evitar cruces.
-						                   </p>
-<a th:href="@{/reservas}" class="quick-link">Abrir módulo de reservas <i class="bi bi-arrow-right"></i></a>
-                </article>
-            </div>
-
-            <div class="col-12 col-lg-6">
-                <article class="section-card bg-white p-4 h-100">
-                    <div class="d-flex align-items-center gap-2 mb-2">
-						<span class="icon-badge"><i class="bi bi-receipt"></i></span>
-						                       <h2 class="h5 m-0">Pedidos</h2>
-                    </div>
-                    <p class="mb-2">
-						Administra los pedidos registrados, su estado de preparación y el seguimiento de consumo por mesa.
-						                   </p>
-<a th:href="@{/pedidos}" class="quick-link">Abrir módulo de pedidos <i class="bi bi-arrow-right"></i></a>                </article>
-            </div>
-
-            <div class="col-12 col-lg-6">
-                <article class="section-card bg-white p-4 h-100">
-                    <div class="d-flex align-items-center gap-2 mb-2">
-						<span class="icon-badge"><i class="bi bi-person-lines-fill"></i></span>
-						                       <h2 class="h5 m-0">Clientes</h2>
-                    <p class="mb-2">
-						Consulta y mantiene datos de clientes para reservas, historial de consumo y atención personalizada.
-						                   </p>
-<a th:href="@{/clientes}" class="quick-link">Abrir módulo de clientes <i class="bi bi-arrow-right"></i></a>
-                </article>
-            </div>
-
-            <div class="col-12">
-                <article class="section-card bg-white p-4">
-                    <div class="d-flex align-items-center gap-2 mb-2">
-					<span class="icon-badge"><i class="bi bi-gear"></i></span>
-					<h2 class="h5 m-0">Catálogo y usuarios</h2>
-                    </div>
-                    <p class="mb-2">
-						Usa productos y categorías para mantener la carta/base de artículos. En usuarios defines quién administra y opera el sistema.
-						                    </p>
-											<div class="d-flex flex-wrap gap-3">
-											                      <a th:href="@{/productos}" class="quick-link">Productos <i class="bi bi-arrow-right"></i></a>
-											                      <a th:href="@{/categorias}" class="quick-link">Categorías <i class="bi bi-arrow-right"></i></a>
-											                      <a th:href="@{/usuarios}" class="quick-link">Usuarios <i class="bi bi-arrow-right"></i></a>
-											                  </div>
-                </article>
-            </div>
-        </div>
-		</main>
+			       <section id="usuarios" class="section-card bg-white p-3">
+			           <h2 class="h5 section-title mb-3">Usuarios</h2>
+			           <a th:href="@{/usuarios/nuevo}" class="btn btn-primary btn-sm mb-2">Crear usuario</a>
+			           <div class="table-responsive">
+			               <table class="table table-hover align-middle mb-0">
+			                   <thead>
+			                   <tr><th>ID</th><th>Nombre</th><th>Email</th><th>Rol</th><th>Acciones</th></tr>
+			                   </thead>
+			                   <tbody>
+			                   <tr th:each="usuario : ${usuarios}">
+			                       <td th:text="${usuario.id}"></td>
+			                       <td th:text="${usuario.nombre}"></td>
+			                       <td th:text="${usuario.email}"></td>
+			                       <td th:text="${usuario.rol != null ? usuario.rol.nombre : '-'}"></td>
+			                   </tr>
+			                   </tbody>
+			               </table>
+			           </div>
+			       </section>
+			   </main>
 </div>
 </body>
 </html>
