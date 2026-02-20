@@ -6,18 +6,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class LoginController {
 	@GetMapping("/")
-	public String landing() {
-	    return "index";
-	}
+    public String landing() {
+        return "index";
+    }
 
-	@GetMapping("/login")
-	public String login() {
-	    return "login"; // templates/login.html
-	}
-
-	@GetMapping("/home")
-	public String home() {
-	    return "menu-admin"; // redirige al index después del login
-	}
+    @GetMapping("/login")
+    public String login() {
+        return "login";
+    }
 
 }

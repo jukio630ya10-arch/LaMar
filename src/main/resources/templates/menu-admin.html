@@ -3,185 +3,124 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Almacén Multiservicios - Inicio</title>
+    <title>Panel de Administración - Restaurante</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
     <style>
-        body { background:#f5f7fa; font-family: Arial, sans-serif; }
-        .hero { background: linear-gradient(135deg, #0d6efd, #0b5ed7); color:#fff; border-radius: 14px; }
-        .section-card { border:1px solid #dee2e6; border-radius:12px; box-shadow: 0 1px 2px rgba(0,0,0,.06); }
-        .icon-badge { width:42px; height:42px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; background:#e9f2fb; color:#0d6efd; }
-        .quick-link { text-decoration:none; }
         body { background:#f5f7fa; font-family: Arial, sans-serif; }
         .layout { display:grid; grid-template-columns:250px 1fr; min-height:100vh; }
         .sidebar { background:#fff; border-right:1px solid #dee2e6; }
         .brand { font-size:1.2rem; font-weight:600; padding:1rem; border-bottom:1px solid #dee2e6; }
         .sidebar .nav-link { color:#2a4a66; padding:.75rem 1rem; border-radius:0; }
-        .sidebar .nav-link.active,.sidebar .nav-link:hover { background:#e9f2fb; color:#0d6efd; }
-        .topbar { background:#fff; border-bottom:1px solid #dee2e6; padding:.75rem 1.25rem; }
-        .content { padding:1.25rem; }
-        .card { border:1px solid #dee2e6; box-shadow:0 1px 2px rgba(0,0,0,.05); }
-        .table thead th { background:#f1f3f5; }
+		.sidebar .nav-link.active, .sidebar .nav-link:hover { background:#e9f2fb; color:#0d6efd; }
+		 .hero { background: linear-gradient(135deg, #0d6efd, #0b5ed7); color:#fff; border-radius: 14px; }
+		 .section-card { border:1px solid #dee2e6; border-radius:12px; box-shadow: 0 1px 2px rgba(0,0,0,.06); }
+		 .icon-badge { width:42px; height:42px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; background:#e9f2fb; color:#0d6efd; }
+		  .quick-link { text-decoration:none; }
     </style>
 </head>
 <body>
 <div class="layout">
     <aside class="sidebar">
-        <div class="brand">MultiStore Manager - Admin</div>
+        <div class="brand">Restaurante | Admin</div>
         <nav class="nav flex-column py-2">
-            <a class="nav-link active" th:href="@{/}"><i class="bi bi-speedometer2 me-2"></i>Panel Principal</a>
-            <a class="nav-link" th:href="@{/categorias}"><i class="bi bi-grid me-2"></i>Categorías</a>
+			<a class="nav-link active" th:href="@{/home}"><i class="bi bi-speedometer2 me-2"></i>Panel principal</a>
+			<a class="nav-link" th:href="@{/mesas}"><i class="bi bi-grid-3x3-gap me-2"></i>Mesas</a>
+			<a class="nav-link" th:href="@{/reservas}"><i class="bi bi-calendar-check me-2"></i>Reservas</a>
+			<a class="nav-link" th:href="@{/pedidos}"><i class="bi bi-receipt me-2"></i>Pedidos</a>
+			<a class="nav-link" th:href="@{/clientes}"><i class="bi bi-person-lines-fill me-2"></i>Clientes</a>
+					   
             <a class="nav-link" th:href="@{/productos}"><i class="bi bi-box-seam me-2"></i>Productos</a>
-            <a class="nav-link" th:href="@{/usuarios}"><i class="bi bi-people me-2"></i>Vendedores</a>
-            <a class="nav-link" th:href="@{/movimientos}"><i class="bi bi-arrow-left-right me-2"></i>Movimientos</a>
-        </nav>
+
+			<a class="nav-link" th:href="@{/categorias}"><i class="bi bi-tags me-2"></i>Categorías</a>
+			           <a class="nav-link" th:href="@{/usuarios}"><i class="bi bi-people me-2"></i>Usuarios</a></nav>
     </aside>
 
-    <div class="container py-4 py-lg-5">
+    <main class="container py-4 py-lg-5">
         <section class="hero p-4 p-lg-5 mb-4">
-            <h1 class="display-6 fw-semibold mb-2">MultiStore Manager</h1>
-            <p class="mb-3">
-                Bienvenido al panel principal del sistema. Este inicio resume, de forma clara,
-                cómo se utiliza cada módulo para controlar inventario, salidas, ventas, usuarios y la operación diaria
-                del MultiStore Manager que atiende diferentes tipos de productos y procesos.
-            </p>
+            <h1 class="display-6 fw-semibold mb-2">Panel de administración del restaurante</h1>
+			
+			            <p class="mb-3">
+							Desde este menú el administrador puede gestionar las mesas, las reservas, los pedidos y el catálogo.
+							                También puedes entrar a clientes y usuarios para mantener control total de la operación diaria.
+							            </p>
             <div class="d-flex flex-wrap gap-2">
-                <a class="btn btn-light btn-sm" th:href="@{/productos}"><i class="bi bi-box-seam me-1"></i>Ir a Productos</a>
-                <a class="btn btn-light btn-sm" th:href="@{/categorias}"><i class="bi bi-grid me-1"></i>Ir a Categorías</a>
-                <a class="btn btn-light btn-sm" th:href="@{/movimientos}"><i class="bi bi-arrow-left-right me-1"></i>Ir a Movimientos</a>
-                <a class="btn btn-light btn-sm" th:href="@{/ventas}"><i class="bi bi-currency-dollar me-1"></i>Ir a Ventas</a>
-                <a class="btn btn-light btn-sm" th:href="@{/usuarios}"><i class="bi bi-people me-1"></i>Ir a Usuarios</a>
-            </div>
-        </section>
 
-        <section class="section-card bg-white p-4 mb-4">
-            <h2 class="h4 mb-3">¿Qué hace cada página?</h2>
-            <p class="text-muted mb-0">
-                El sistema está pensado para la gestión integral de un <strong>Almacén Multiservicios</strong>: un negocio
-                donde coexisten productos de diferentes categorías, entradas y salidas constantes, y múltiples usuarios operando.
-                Cada página cumple un rol específico dentro del flujo operativo diario.
-            </p>
+			<a class="btn btn-light btn-sm" th:href="@{/mesas}"><i class="bi bi-grid-3x3-gap me-1"></i>Gestionar mesas</a>
+			               <a class="btn btn-light btn-sm" th:href="@{/reservas}"><i class="bi bi-calendar-check me-1"></i>Gestionar reservas</a>
+			               <a class="btn btn-light btn-sm" th:href="@{/pedidos}"><i class="bi bi-receipt me-1"></i>Gestionar pedidos</a>
+			               <a class="btn btn-light btn-sm" th:href="@{/clientes}"><i class="bi bi-person-lines-fill me-1"></i>Gestionar clientes</a></div>
         </section>
 
         <div class="row g-3">
             <div class="col-12 col-lg-6">
                 <article class="section-card bg-white p-4 h-100">
                     <div class="d-flex align-items-center gap-2 mb-2">
-                        <span class="icon-badge"><i class="bi bi-box-seam"></i></span>
-                        <h3 class="h5 m-0">Página de Productos</h3>
+						<span class="icon-badge"><i class="bi bi-grid-3x3-gap"></i></span>
+						                       <h2 class="h5 m-0">Mesas</h2>
                     </div>
                     <p class="mb-2">
-                        Desde esta vista se visualiza el catálogo activo del almacén: nombre, precio, stock y acciones rápidas.
-                        Es el núcleo de consulta para saber qué artículos están disponibles en tiempo real y cuáles requieren reposición.
-                    </p>
+						Controla disponibilidad de mesas, capacidad y estado de atención para ordenar el flujo en salón.
+					</p>
+ 					<a th:href="@{/mesas}" class="quick-link">Abrir módulo de mesas <i class="bi bi-arrow-right"></i></a>
+                 </article>
+            </div>
+
+            <div class="col-12 col-lg-6">
+                <article class="section-card bg-white p-4 h-100">
+                    <div class="d-flex align-items-center gap-2 mb-2">
+						<span class="icon-badge"><i class="bi bi-calendar-check"></i></span>
+					<h2 class="h5 m-0">Reservas</h2>
+                    </div>
                     <p class="mb-2">
-                        El formulario de productos permite registrar nuevos ítems o editar existentes, asegurando que la data de inventario
-                        se mantenga limpia y usable para movimientos y ventas posteriores.
-                    </p>
-                    <a th:href="@{/productos}" class="quick-link">Abrir productos <i class="bi bi-arrow-right"></i></a>
+						Gestiona reservas por fecha y hora, con mesa asignada y cliente relacionado para evitar cruces.
+						                   </p>
+<a th:href="@{/reservas}" class="quick-link">Abrir módulo de reservas <i class="bi bi-arrow-right"></i></a>
                 </article>
             </div>
 
             <div class="col-12 col-lg-6">
                 <article class="section-card bg-white p-4 h-100">
                     <div class="d-flex align-items-center gap-2 mb-2">
-                        <span class="icon-badge"><i class="bi bi-grid"></i></span>
-                        <h3 class="h5 m-0">Página de Categorías</h3>
+						<span class="icon-badge"><i class="bi bi-receipt"></i></span>
+						                       <h2 class="h5 m-0">Pedidos</h2>
                     </div>
                     <p class="mb-2">
-                        Las categorías organizan el catálogo en familias lógicas (por ejemplo: ferretería, limpieza, oficina, alimentos,
-                        repuestos, etc.). Esto ayuda a buscar productos más rápido y a ordenar reportes por líneas de negocio.
-                    </p>
-                    <p class="mb-2">
-                        Desde su formulario se crean y actualizan categorías, evitando duplicidad y mejorando el control de inventario
-                        en un entorno multiservicios donde hay variedad de rubros.
-                    </p>
-                    <a th:href="@{/categorias}" class="quick-link">Abrir categorías <i class="bi bi-arrow-right"></i></a>
-                </article>
+						Administra los pedidos registrados, su estado de preparación y el seguimiento de consumo por mesa.
+						                   </p>
+<a th:href="@{/pedidos}" class="quick-link">Abrir módulo de pedidos <i class="bi bi-arrow-right"></i></a>                </article>
             </div>
 
             <div class="col-12 col-lg-6">
                 <article class="section-card bg-white p-4 h-100">
                     <div class="d-flex align-items-center gap-2 mb-2">
-                        <span class="icon-badge"><i class="bi bi-arrow-left-right"></i></span>
-                        <h3 class="h5 m-0">Página de Movimientos</h3>
-                    </div>
+						<span class="icon-badge"><i class="bi bi-person-lines-fill"></i></span>
+						                       <h2 class="h5 m-0">Clientes</h2>
                     <p class="mb-2">
-                        Aquí se registran las <strong>ENTRADAS</strong> y <strong>SALIDAS</strong> de inventario. Cada movimiento impacta
-                        directamente en el stock del producto relacionado, dejando trazabilidad de fecha, cantidad y usuario responsable.
-                    </p>
-                    <p class="mb-2">
-                        Esta página es clave para auditoría operativa: permite entender por qué subió o bajó el stock y mantener
-                        consistencia entre inventario físico y sistema.
-                    </p>
-                    <a th:href="@{/movimientos}" class="quick-link">Abrir movimientos <i class="bi bi-arrow-right"></i></a>
+						Consulta y mantiene datos de clientes para reservas, historial de consumo y atención personalizada.
+						                   </p>
+<a th:href="@{/clientes}" class="quick-link">Abrir módulo de clientes <i class="bi bi-arrow-right"></i></a>
                 </article>
-            </div>
-
-            <div class="col-12 col-lg-6">
-                <article class="section-card bg-white p-4 h-100">
-                    <div class="d-flex align-items-center gap-2 mb-2">
-                        <span class="icon-badge"><i class="bi bi-currency-dollar"></i></span>
-                        <h3 class="h5 m-0">Página de Ventas</h3>
-                    </div>
-                    <p class="mb-2">
-                        La vista de ventas lista solo movimientos de tipo <strong>SALIDA</strong>, simulando el flujo comercial del almacén.
-                        Además muestra precio unitario y total por línea para facilitar seguimiento de ingresos estimados por operación.
-                    </p>
-                    <p class="mb-2">
-                        Esta pantalla ayuda al encargado a revisar rápidamente qué productos se están vendiendo más y qué usuario
-                        registró cada salida.
-                    </p>
-                    <a th:href="@{/ventas}" class="quick-link">Abrir ventas <i class="bi bi-arrow-right"></i></a>
-                </article>
-            </div>
-
-            <div class="col-12 col-lg-6">
-                <article class="section-card bg-white p-4 h-100">
-                    <div class="d-flex align-items-center gap-2 mb-2">
-                        <span class="icon-badge"><i class="bi bi-box-arrow-in-down me-2"></i></span>
-                        <h3 class="h5 m-0">Página de Entradas</h3>
-                    </div>
-                    <p class="mb-2">
-                        La vista de entradas lista solo movimientos de tipo <strong>ENTRADA</strong>, representando el flujo de abastecimiento y reposición del almacén.
-                        Además, muestra precio unitario y total por línea para facilitar el seguimiento del valor invertido en la reposición de productos.
-                    </p>
-                    <p class="mb-2">
-                        Esta pantalla ayuda al encargado a revisar rápidamente qué productos están siendo reabastecidos con mayor frecuencia y qué usuario registró cada entrada.
-                    </p>
- <a th:href="@{/entradas}" class="quick-link">Abrir entradas <i class="bi bi-arrow-right"></i></a>                </article>
             </div>
 
             <div class="col-12">
                 <article class="section-card bg-white p-4">
                     <div class="d-flex align-items-center gap-2 mb-2">
-                        <span class="icon-badge"><i class="bi bi-people"></i></span>
-                        <h3 class="h5 m-0">Página de Usuarios / Vendedores</h3>
+					<span class="icon-badge"><i class="bi bi-gear"></i></span>
+					<h2 class="h5 m-0">Catálogo y usuarios</h2>
                     </div>
                     <p class="mb-2">
-                        Este módulo administra el personal que opera el sistema (vendedores, encargados o administradores).
-                        Permite registrar usuarios con rol y mantener control de quién ejecuta movimientos de inventario.
-                    </p>
-                    <p class="mb-0">
-                        En un Almacén Multiservicios, donde varias personas pueden registrar operaciones en simultáneo,
-                        esta trazabilidad por usuario es fundamental para seguridad, responsabilidad y análisis de desempeño.
-                    </p>
-                    <a th:href="@{/usuarios}" class="quick-link">Abrir usuarios <i class="bi bi-arrow-right"></i></a>
+						Usa productos y categorías para mantener la carta/base de artículos. En usuarios defines quién administra y opera el sistema.
+						                    </p>
+											<div class="d-flex flex-wrap gap-3">
+											                      <a th:href="@{/productos}" class="quick-link">Productos <i class="bi bi-arrow-right"></i></a>
+											                      <a th:href="@{/categorias}" class="quick-link">Categorías <i class="bi bi-arrow-right"></i></a>
+											                      <a th:href="@{/usuarios}" class="quick-link">Usuarios <i class="bi bi-arrow-right"></i></a>
+											                  </div>
                 </article>
             </div>
         </div>
-
-        <section class="section-card bg-white p-4 mt-4">
-            <h2 class="h5">Flujo recomendado de uso</h2>
-            <ol class="mb-0">
-                <li>Registrar categorías para estructurar el catálogo.</li>
-                <li>Registrar productos con precio y stock inicial.</li>
-                <li>Crear usuarios que operarán el almacén.</li>
-                <li>Registrar movimientos de entrada/salida según operación diaria.</li>
-                <li>Monitorear la vista de ventas para revisar salidas valorizadas (precio y total).</li>
-            </ol>
-        </section>
-    </div>
+		</main>
 </div>
 </body>
 </html>
